@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+<style>
+body
+{
+	font-size:20pt;
+}
+#header
+{
+	background-image:url('bg_checker.png');
+	color:#FFF;
+	font-size:30pt;
+	padding:10px;
+}
+#slides
+{
+	width:100%;
+	height:400px;
+}
+#survey
+{
+	padding:10px;
+}
+.blue,.grey
+{
+	padding:0px 10px;
+	font-size:20pt;
+	color:#fff;
+}
+.blue
+{
+	background:#001f58;
+}
+.grey
+{
+	background:#AAA;
+}
+.ques
+{
+	display:none;
+}
+.text
+{
+	display:block;
+	width:100%;
+	font-size:20pt;
+}
+</style>
+</head>
+
+<body>
+<div id='header'>香港開源年會 2013 - 開源遊戲: 前瞻</div>
+<iframe id='slides' src="https://docs.google.com/presentation/d/1XClkh_3Y28qBCxDpA2iTljYZFm9fUkzO-c_RhkwMVAs/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div id='survey'>
+<span style='font-size:25pt;'>簡單調查</span><br>
+Q1. 你是否資深電腦用家?
+<input type='button' class='blue' value='是' onclick="qq(1,'yes')"/>
+<input type='button' class='grey' value='否' onclick="qq(1,'no');"/><br>
+<div id='q1no' class='ques'>
+	咁你今日黎做乜嫁?
+</div>
+<div id='q1yes' class='ques'>
+	Q2. 你是否遊戲玩家?
+	<input type='button' class='blue' value='是' onclick="qq(2,'yes')"/>
+	<input type='button' class='grey' value='否' onclick="qq(2,'no');"/><br>
+	<div id='q2yes' class='ques'>
+		Q2.a. 你最喜歡甚麼遊戲?
+		<input id='q2a' type='text' class='text'/>
+	</div>
+	<div id='q2no' class='ques'>
+		噢, 咁你今日黎做乜嫁?<br>
+	</div>
+	Q3. 你有沒有編程經驗?
+	<input type='button' class='blue' value='有' onclick="qq(3,'yes')"/>
+	<input type='button' class='grey' value='沒有' onclick="qq(3,'no');"/><br>
+	<div id='q3yes' class='ques'>
+		Q4. 你有沒有開源軟件開發經驗?
+		<input type='button' class='blue' value='有' onclick="qq(4,'yes')"/>
+		<input type='button' class='grey' value='沒有' onclick="qq(4,'no');"/><br>
+		<div id='q4yes' class='ques'>
+			很好.<br>
+		</div>
+		<div id='q4no' class='ques'>
+			不要緊.<br>
+		</div>
+		Q5. 你有沒有遊戲開發經驗?
+		<input type='button' class='blue' value='有' onclick="qq(5,'yes')"/>
+		<input type='button' class='grey' value='沒有' onclick="qq(5,'no');"/><br>
+		<div id='q5yes' class='ques'>
+			很好!<br>
+		</div>
+		<div id='q5no' class='ques'>
+			不要緊.<br>
+		</div>
+		Q6. 你有沒有興趣參與開源遊戲開發?
+		<input type='button' class='blue' value='有' onclick="qq(6,'yes')"/>
+		<input type='button' class='grey' value='沒有' onclick="qq(6,'no');"/><br>
+	</div>
+	<div id='q3no' class='ques'>
+		Q4. 你有沒有遊戲設計經驗?
+		<input type='button' class='blue' value='有' onclick="qq(7,'yes')"/>
+		<input type='button' class='grey' value='沒有' onclick="qq(7,'no');"/><br>
+		<div id='q7yes' class='ques'>
+			太好了!<br>
+		</div>
+		<div id='q7no' class='ques'>
+			不要緊.<br>
+		</div>
+		Q5. 你有沒有興趣參與開源遊戲開發?
+		<input type='button' class='blue' value='有' onclick="qq(6,'yes')"/>
+		<input type='button' class='grey' value='沒有' onclick="qq(6,'no');"/><br>
+	</div>
+	<div id='q6yes' class='ques'>
+		太好了!<br>
+	</div>
+	<div id='q6no' class='ques'>
+		不要緊.<br>
+	</div>
+	<div id='qlast' class='ques'>
+		Qlast. 你可以留個contact嗎?
+		<input id='qcontact' type='text' class='text'/>
+		將會有專人與你聯絡! 多謝你的參與.<br>
+		<input id='submit' type='button' class='blue' value='送出' onclick="submitform()"/>
+	</div>
+</div>
+</div><!--survey-->
+<div id='finished_already' style='display:none;'>
+你已經完成問卷了. 你想再填嗎?
+<input type='button' class='blue' value='想' onclick="showagain()"/>
+</div>
+
+<script>
+function qq(q,k)
+{
+	$('q'+q+k).style.display='inline';
+	$('q'+q+(k==='yes'?'no':'yes')).style.display='none';
+	if( q===6)
+		$('qlast').style.display='inline';
+}
+function showagain()
+{
+	$('survey').style.display='';
+	$('finished_already').style.display='none';
+}
+function submitform()
+{
+	if( !confirm('你確定要送出?'))
+		return;
+	var O={};
+	for( var i=1; i<=7; i++)
+	{
+		if( $('q'+i+'yes').style.display!==$('q'+i+'no').style.display)
+		{
+			if( $('q'+i+'yes').style.display==='inline')
+				O['q'+i] = 'yes';
+			else
+				O['q'+i] = 'no';
+		}
+		else
+			O['q'+i] = 'nan';
+
+		O['q2a'] = $('q2a').value;
+		O['contact'] = $('qcontact').value;
+	}
+	submit_form(
+		[O.q1,O.q2,O.q2a,O.q3,O.q4,O.q5,O.q6,O.q7,O.contact]
+	);
+	window.localStorage.setItem('finished','already');
+	$('survey').style.display='none';
+	$('finished_already').style.display='inline';
+}
+function submit_form(ldata)
+{	//submit log to google form silently
+	var form = document.createElement('form');
+	var target = document.createElement('iframe');
+	target.name = 'hiddenframe';
+	target.style.display = 'none';
+	var body = document.getElementsByTagName('body')[0];
+	form.action = 'https://docs.google.com/forms/d/1hTRaFR-W-2Rv2FcNymvf5QohbyioQM6vjpPQMpgTSIE/formResponse';
+	form.method = 'POST';
+	form.style.display = 'none';
+	form.target = 'hiddenframe';
+	body.appendChild(target);
+	body.appendChild(form);
+	var data=[];
+	for( var i=0; i<9; i++)
+	{
+		data[i] = document.createElement('input');
+		data[i].type = 'text';
+		data[i].value = ldata[i];
+		form.appendChild(data[i]);
+	}
+	data[0].name = 'entry.1002135453';
+	data[1].name = 'entry.216233306';
+	data[2].name = 'entry.372186536';
+	data[3].name = 'entry.181736257';
+	data[4].name = 'entry.1910678310';
+	data[5].name = 'entry.1143751358';
+	data[6].name = 'entry.860662732';
+	data[7].name = 'entry.837326780';
+	data[8].name = 'entry.1774087671';
+	form.submit();
+}
+if( window.localStorage)
+{
+	if( window.localStorage.getItem('finished'))
+	{
+		$('survey').style.display='none';
+		$('finished_already').style.display='inline';
+	}
+}
+function $(e)
+{
+	return document.getElementById(e);
+}
+// Storage polyfill by Remy Sharp
+// [--
+// https://github.com/inexorabletash/polyfill/blob/master/storage.js
+// https://gist.github.com/350433
+// Tweaks by Joshua Bell (inexorabletash@gmail.com)
+if (!window.localStorage || !window.sessionStorage) (function() {
+
+	var Storage = function(type) {
+		function createCookie(name, value, days) {
+			var date, expires;
+
+			if (days) {
+				date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				expires = "; expires=" + date.toGMTString();
+			} else {
+				expires = "";
+			}
+			document.cookie = name + "=" + value + expires + "; path=/";
+		}
+
+		function readCookie(name) {
+			var nameEQ = name + "=",
+				ca = document.cookie.split(';'),
+				i, c;
+
+			for (i = 0; i < ca.length; i++) {
+				c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1, c.length);
+				}
+
+				if (c.indexOf(nameEQ) == 0) {
+					return c.substring(nameEQ.length, c.length);
+				}
+			}
+			return null;
+		}
+
+		function setData(data) {
+			data = JSON.stringify(data);
+			if (type == 'session') {
+				window.name = data;
+			} else {
+				createCookie('localStorage', data, 365);
+			}
+		}
+
+		function clearData() {
+			if (type == 'session') {
+				window.name = '';
+			} else {
+				createCookie('localStorage', '', 365);
+			}
+		}
+
+		function getData() {
+			var data = type == 'session' ? window.name : readCookie('localStorage');
+			return data ? JSON.parse(data) : {};
+		}
+
+
+		// initialise if there's already data
+		var data = getData();
+
+		function numKeys() {
+			var n = 0;
+			for (var k in data) {
+				if (data.hasOwnProperty(k)) {
+					n += 1;
+				}
+			}
+			return n;
+		}
+
+		return {
+			clear: function() {
+				data = {};
+				clearData();
+				this.length = numKeys();
+			},
+			getItem: function(key) {
+				key = encodeURIComponent(key);
+				return data[key] === undefined ? null : data[key];
+			},
+			key: function(i) {
+				// not perfect, but works
+				var ctr = 0;
+				for (var k in data) {
+					if (ctr == i) return decodeURIComponent(k);
+					else ctr++;
+				}
+				return null;
+			},
+			removeItem: function(key) {
+				key = encodeURIComponent(key);
+				delete data[key];
+				setData(data);
+				this.length = numKeys();
+			},
+			setItem: function(key, value) {
+				key = encodeURIComponent(key);
+				data[key] = String(value);
+				setData(data);
+				this.length = numKeys();
+			},
+			length: 0
+		};
+	};
+
+	if (!window.localStorage) window.localStorage = new Storage('local');
+	if (!window.sessionStorage) window.sessionStorage = new Storage('session');
+
+}());
+//--]
+</script>
+</body>
