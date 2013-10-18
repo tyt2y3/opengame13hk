@@ -6,12 +6,16 @@ body
 {
 	font-size:20pt;
 }
-#header
+#header, #footer
 {
 	background-image:url('bg_checker.png');
 	color:#FFF;
 	font-size:30pt;
 	padding:10px;
+}
+#footer
+{
+	font-size:12pt;
 }
 #slides
 {
@@ -126,8 +130,11 @@ Q1. 你是否資深電腦用家?
 </div>
 </div><!--survey-->
 <div id='finished_already' style='display:none;'>
-你已經完成問卷了. 你想再填嗎?
-<input type='button' class='blue' value='想' onclick="showagain()"/>
+	你已經完成問卷了. 你想再填嗎?
+	<input type='button' class='blue' value='想' onclick="showagain()"/>
+</div>
+<div id='footer'>
+by Chris Tsang tyt2y3@gmail.com
 </div>
 
 <script>
@@ -166,7 +173,7 @@ function submitform()
 	submit_form(
 		[O.q1,O.q2,O.q2a,O.q3,O.q4,O.q5,O.q6,O.q7,O.contact]
 	);
-	window.localStorage.setItem('finished','already');
+	window.localStorage.setItem('opengame13hksurvey','finished');
 	$('survey').style.display='none';
 	$('finished_already').style.display='inline';
 }
@@ -204,7 +211,7 @@ function submit_form(ldata)
 }
 if( window.localStorage)
 {
-	if( window.localStorage.getItem('finished'))
+	if( window.localStorage.getItem('opengame13hksurvey'))
 	{
 		$('survey').style.display='none';
 		$('finished_already').style.display='inline';
