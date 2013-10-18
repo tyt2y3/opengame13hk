@@ -5,13 +5,13 @@
 <style>
 body
 {
-	font-size:20pt;
+	font-size:18pt;
 }
 #header, #footer
 {
 	background-image:url('bg_checker.png');
 	color:#FFF;
-	font-size:30pt;
+	font-size:25pt;
 	padding:10px;
 }
 #footer
@@ -25,8 +25,16 @@ body
 #slides
 {
 	width:80%;
-	height:400px;
+	height:300px;
 	margin:20px;
+}
+@media (min-width: 600px)
+{
+	#slides
+	{
+		width:90%;
+		height:500px;
+	}
 }
 #survey
 {
@@ -68,7 +76,7 @@ body
 <iframe id='slides' src="https://docs.google.com/presentation/d/1XClkh_3Y28qBCxDpA2iTljYZFm9fUkzO-c_RhkwMVAs/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 </div>
 <div id='survey'>
-<span style='font-size:25pt;'>簡單調查</span><br>
+<span style='font-size:22pt;'>簡單調查</span><br>
 Q1. 你是否資深電腦用家?
 <input type='button' class='blue' value='是' onclick="qq(1,'yes')"/>
 <input type='button' class='grey' value='否' onclick="qq(1,'no');"/><br>
